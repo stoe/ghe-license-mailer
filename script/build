@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+pkg="ghe-license-mailer"
+platforms=("windows/amd64" "windows/386" "linux/amd64" "linux/386" "darwin/amd64" "darwin/386")
+
+for platform in "${platforms[@]}"; do
+  # shellcheck disable=SC2206
+  platform_split=(${platform//\// })
+
+  GOOS=${platform_split[0]}
+  GOARCH=${platform_split[1]}
+
+  if [ "${GOARCH}" = "386" ]; then
+    arch="i386"
+  elif [ "${GOARCH}" = "amd64" ]; then
+    arch="x86_64"
+  else
+    arch="${GOARCH}"
+  fi
+
+  filename_name="${pkg}"
+  folder_name="${pkg}-${GOOS}-${arch}"
+
+  if [ "${GOOS}" = "windows" ]; then
+    filename_name+=".exe"
+  fi
+
+  [ ! -d "./build/${folder_name}" ] && mkdir -p "./build/${folder_name}"
+
+  env GOOS="${GOOS}" GOARCH="${GOARCH}" go build -o "./build/${folder_name}/${filename_name}" . || {
+    echo 'An error has occurred! Aborting the script execution...'
+    exit 1
+  }
+
+  cp ./readme.md "./build/${folder_name}"
+  cp ./license "./build/${folder_name}"
+
+  cd ./build
+
+  if [ "${GOOS}" = "windows" ]; then
+    zip -rq "./${folder_name}.zip" "./${folder_name}/"
+  else
+    tar -czf "./${folder_name}.tar.gz" "./${folder_name}/"
+  fi
+
+  rm -rf "./${folder_name}/"
+
+  cd ..
+done

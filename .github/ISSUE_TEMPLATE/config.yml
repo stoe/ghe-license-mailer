@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Twitter
+    url: https://twitter.com/_stoe
+    about: "Reach me on Twitter"
+  - name: LinkedIn
+    url: https://www.linkedin.com/in/stoe/
+    about: "Reach me on LinkedIn"
