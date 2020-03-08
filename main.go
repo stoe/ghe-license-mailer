@@ -144,7 +144,7 @@ func init() {
 	// validate
 	validateFlags()
 
-	// -------------------------------------------------------------------------------------------------------------------
+	// -----------------------------------------------------------------------------------------------------------------
 
 	src := oauth2.StaticTokenSource(
 		&oauth2.Token{AccessToken: token},
@@ -323,7 +323,7 @@ func validateFlags() {
 
 func printHelp() {
 	fmt.Println(`USAGE:
-       ghe-license-mailer [OPTIONS]
+  ghe-license-mailer [OPTIONS]
 
 OPTIONS:`)
 	pflag.PrintDefaults()

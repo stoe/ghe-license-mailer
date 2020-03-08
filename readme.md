@@ -2,13 +2,13 @@
 
 > GitHub Enterprise Server license usage mailer
 
-![Build](https://github.com/stoe/ghe-license-mailer/workflows/Go/badge.svg)
+[![build](https://github.com/stoe/ghe-license-mailer/workflows/build/badge.svg)](https://github.com/stoe/ghe-license-mailer/actions?query=workflow%3Abuild) [![release](https://github.com/stoe/ghe-license-mailer/workflows/release/badge.svg)](https://github.com/stoe/ghe-license-mailer/actions?query=workflow%3Arelease)
 
 ## Usage
 
 ```sh
 USAGE:
-       ghe-license-mailer [OPTIONS]
+  ghe-license-mailer [OPTIONS]
 
 OPTIONS:
       --config string     path to the config file (defaults to $HOME/.ghe-license-mailer)

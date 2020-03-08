@@ -1,0 +1,37 @@
+before:
+  hooks:
+    - rm -rf dist/
+    - go mod download
+    - go generate ./...
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    files:
+      - license
+      - readme.md
+    format_overrides:
+      - goos: windows
+        format: zip
+    wrap_in_directory: true
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  name_template: "{{ .Tag }}"
+
+changelog:
+  skip: true
